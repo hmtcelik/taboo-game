@@ -5,49 +5,80 @@ import { useParams } from 'react-router-dom'
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { v4 as uuidv4 } from 'uuid';
 
-function Room() {
+export interface DataType {
+  clients: {
+    id: string
+    username: string
+    team: number
+    score: number 
+  }[]
+  is_started: boolean
+  is_ended: boolean
+}
 
+function Room() {
+  const [clientID, setClientID] = useState<string|null>(null)
+  const [username, setUsername]= useState<string|null>(sessionStorage.getItem('username'))
+  const navigate = useNavigate();
   const { id, capacity } = useParams();
 
-  const client_id = uuidv4();
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  const navigate = useNavigate();
-
-  useEffect(()=>{
-    let username = sessionStorage.getItem('username')
-    if (username === null){
-      navigate(`/setNickName/?nexturl=/room/${id}/${capacity}`)
-    }
-  },[])
-
-  const [isCreating, setIsCreating] = useState<boolean>(false)
-  const [createColor, setCreateColor] = useState<string>("bg-green-600")
-
-  const [data, setData] = useState(
+  const [data, setData] = useState<DataType>(
     {
-      "teamless": [sessionStorage.getItem('username')],
-      "red_team": [],
-      "blue_team": [],
-      "red_score": 0,
-      "blue_score": 0,
+      "clients": [],
       "is_started": false,
+      "is_ended": false
     }
   )
 
-  const [messageHistory, setMessageHistory] = useState('');
+  useEffect(()=>{
+    if (username === null){
+      navigate(`/setNickName/?nexturl=/room/${id}/${capacity}`)
+    }    
+  },[])
 
-  const { sendMessage, lastMessage, readyState } = useWebSocket(`ws://localhost:8000/ws/${id}/${client_id}`);
+  const { sendJsonMessage, lastMessage, lastJsonMessage } = useWebSocket(`ws://localhost:8000/ws/${id}/${clientID}`);  
+  
+  useEffect(()=>{
+    let client_id = uuidv4()
+    setClientID(client_id)
 
-  useEffect(() => {
-    if (lastMessage !== null) {
-      setMessageHistory('');
+    sendJsonMessage(JSON.parse(JSON.stringify({"action":"get_data"})))
+    sendJsonMessage(JSON.parse(JSON.stringify({"action":"connect", "client_id":client_id, "username":username})))
+  },[])
+
+  useEffect(()=>{
+    if (lastJsonMessage || null !== null){
+      setIsLoading(false)
     }
-  }, [lastMessage, setMessageHistory]);
+
+    setData((JSON.parse(lastMessage?.data || JSON.stringify(data) )))
+
+  },[lastJsonMessage])
+
+  console.log(typeof(data))
+  console.log(lastJsonMessage);
+  console.log(data);
+  
+
+  const [isCreating, setIsCreating] = useState<boolean>(false)
+  const [createColor, setCreateColor] = useState<string>("bg-green-600")
   
 
   return (
     <div className="bg-indigo-300 h-screen grid grid-cols-1 justify-items-center content-start">
-      <div className="w-full max-w-xl mx-auto p-6 mt-24">
+      {isLoading && 
+      <div
+        className="mt-12 animate-spin inline-block w-12 h-12 border-[4px] border-current border-t-transparent text-blue-600 rounded-full"
+        role="status"
+        aria-label="loading"
+        >
+        <span className="sr-only">Loading...</span>
+      </div>
+      }
+      {!isLoading  && 
+      <div className="w-full max-w-6xl mx-auto p-6 mt-24">
         <div className="mt-7 pb-3 bg-white border border-gray-200 rounded-xl shadow-sm">
           <div className="p-4 sm:p-7">
             <div className="mt-4 text-center">
@@ -64,51 +95,23 @@ function Room() {
                         <div className="border rounded-lg shadow overflow-hidden dark:border-gray-700 dark:shadow-gray-900">
                             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                                <tr>
-                                <td className="px-6 py-4 whitespace-nowrap text-md font-semibold	 text-gray-800 dark:text-gray-200">
-                                    John Brown
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <p className="text-red-500 hover:cursor-pointer hover:text-red-700">
-                                    Kırmızı Takım
-                                    </p>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <p className="text-blue-500 hover:cursor-pointer hover:text-blue-700">
-                                    Mavi Takım
-                                    </p>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td className="px-6 py-4 whitespace-nowrap text-md font-semibold	 text-gray-800 dark:text-gray-200">
-                                    Jim Green
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <p className="text-red-500 hover:cursor-pointer hover:text-red-700">
-                                    Kırmızı Takım
-                                    </p>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <p className="text-blue-500 hover:cursor-pointer hover:text-blue-700">
-                                    Mavi Takım
-                                    </p>
-                                </td>
-                                </tr>
-                                <tr>
-                                <td className="px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-800 dark:text-gray-200">
-                                    Joe Black
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <p className="text-red-500 hover:cursor-pointer hover:text-red-700">
-                                    Kırmızı Takım
-                                    </p>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <p className="text-blue-500 hover:cursor-pointer hover:text-blue-700">
-                                    Mavi Takım
-                                    </p>
-                                </td>
-                                </tr>
+                                {data.clients?.map((cl)=>(
+                                  <tr key={cl.id} >
+                                  <td className="px-6 py-4 whitespace-nowrap text-md font-semibold	 text-gray-800 dark:text-gray-200">
+                                      {cl.username}
+                                  </td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                      <p className="text-red-500 hover:cursor-pointer hover:text-red-700">
+                                      Kırmızı Takım
+                                      </p>
+                                  </td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                      <p className="text-blue-500 hover:cursor-pointer hover:text-blue-700">
+                                      Mavi Takım
+                                      </p>
+                                  </td>
+                                  </tr>
+                                ))}
                             </tbody>
                             </table>
                         </div>
@@ -133,7 +136,7 @@ function Room() {
             </div>
           </div>
         </div>
-      </div>
+      </div>}
     </div>
   )
 }

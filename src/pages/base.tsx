@@ -31,6 +31,7 @@ function Base() {
   const [isError, setIsError] = useState<boolean>(false)
   const [errorMsg, setErrorMsg] = useState<string>("")
 
+  
   return (
     <>
     <div className="bg-indigo-300 h-screen grid grid-cols-1 justify-items-center content-start">

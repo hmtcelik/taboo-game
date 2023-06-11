@@ -1,9 +1,8 @@
 import { useState } from "react"
 import { useEffect } from "react";
-import { Link, useFetcher, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
-import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { v4 as uuidv4 } from 'uuid';
+import useWebSocket from 'react-use-websocket';
 
 export interface DataType {
   clients: ClientType[]
@@ -33,15 +32,15 @@ function Room() {
   const navigate = useNavigate();
   const { id, capacity } = useParams();
   
-  const [clientID, setClientID] = useState<string|null>(sessionStorage.getItem('client_id'))
-  const [username, setUsername]= useState<string|null>(sessionStorage.getItem('username'))
+  const [clientID] = useState<string|null>(sessionStorage.getItem('client_id'))
+  const [username]= useState<string|null>(sessionStorage.getItem('username'))
   
   const [isValid, setIsValid]= useState<boolean>(false)
   const [isValidErrorShown, setIsValidErrorShown]= useState<boolean>(false)
   const [disableStyles, setDisableStyles]= useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(true)
   
-  const [isCreating, setIsCreating] = useState<boolean>(false)
+  const [isCreating] = useState<boolean>(false)
   const [createColor, setCreateColor] = useState<string>("bg-gray-300")
   
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false)

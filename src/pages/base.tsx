@@ -6,7 +6,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 function Base() {
 
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _] = useSearchParams();
 
   useEffect(()=>{
     let username = sessionStorage.getItem('username')
@@ -30,9 +30,6 @@ function Base() {
 
   const [isError, setIsError] = useState<boolean>(false)
   const [errorMsg, setErrorMsg] = useState<string>("")
-
-  const [isJoining, setIsJoining] = useState<boolean>(false)
-  const [joinColor, setJoinColor] = useState<string>("bg-blue-500")
 
   return (
     <>

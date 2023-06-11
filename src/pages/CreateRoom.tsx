@@ -5,8 +5,6 @@ import { Link } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid';
 
 function CreateRoom() {
-  const [password, setPassword] = useState<string>('')
-
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -19,7 +17,6 @@ function CreateRoom() {
   const [isCreating, setIsCreating] = useState<boolean>(false)
   const [createColor, setCreateColor] = useState<string>("bg-blue-500")
 
-  const [isPass, setIsPass] = useState<boolean>(false)
   const [capacity, setCapacity] = useState<number>(6)
 
   return (

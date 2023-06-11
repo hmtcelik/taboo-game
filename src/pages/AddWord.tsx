@@ -1,8 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
-
+import { useState } from "react"
 
 function AddWord() {
   const [error, setError] = useState<boolean>(false)

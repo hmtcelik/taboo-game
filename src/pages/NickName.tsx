@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,7 +11,7 @@ function NickName() {
   const [errorMsg, setErrorMsg] = useState<string>("")
   const [username, setUsername] = useState<string>('')
   
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _] = useSearchParams();
   const navigate = useNavigate();
 
   const submitUsername = (e:any) =>{

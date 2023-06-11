@@ -10,7 +10,7 @@ function CreateRoom() {
   useEffect(()=>{
     let username = sessionStorage.getItem('username')
     if (username === null){
-      navigate('/setNickName/?nexturl=/create/')
+      navigate('/taboo-game/setNickName/?nexturl=/create/')
     }
   },[])
 
@@ -76,7 +76,7 @@ function CreateRoom() {
                     }
                 </div> */}
                 <Link
-                to={`/room/${uuidv4()}/${capacity}`}
+                to={`/taboo-game/room/${uuidv4()}/${capacity}`}
                 className= {`mt-1 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent
                  font-semibold ${createColor} text-white hover:bg-blue-600 transition-all text-sm `}
                 onClick={()=>{setIsCreating(true);setCreateColor('bg-blue-600');}}

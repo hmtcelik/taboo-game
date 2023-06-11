@@ -11,7 +11,7 @@ function Base() {
   useEffect(()=>{
     let username = sessionStorage.getItem('username')
     if (username === null){
-      navigate('/setNickName/?nexturl=/')
+      navigate('/taboo-game/setNickName/?nexturl=/')
     }
     if (searchParams.get("msg") === "AdminLeft"){
       setIsError(true)

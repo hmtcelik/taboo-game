@@ -27,7 +27,7 @@ function NickName() {
     } else {
       sessionStorage.setItem('username', username)
       sessionStorage.setItem('client_id', uuidv4())
-      navigate((searchParams.get("nexturl") !== null) ? searchParams.get("nexturl")! : '/' )
+      navigate((searchParams.get("nexturl") !== null) ? '/taboo-game' + searchParams.get("nexturl")! : '/taboo-game' )
     }
   }
 

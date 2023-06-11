@@ -87,7 +87,7 @@ function Room() {
 
   useEffect(()=>{
     if (username === null){
-      navigate(`/setNickName/?nexturl=/room/${id}/${capacity}`)
+      navigate(`/taboo-game/setNickName/?nexturl=/room/${id}/${capacity}`)
     }    
   },[])
 
@@ -133,11 +133,11 @@ function Room() {
       }
     }
     if ((data.is_started) && (!(is_client_in))){
-      navigate("/?msg=AlreadyStart")
+      navigate("/taboo-game/?msg=AlreadyStart")
     }
 
     if ((data.clients.length>=Number(capacity)) && (!(is_client_in))){
-      navigate("/?msg=RoomIsFull")
+      navigate("/taboo-game/?msg=RoomIsFull")
     }
 
     if (data.clients.length <= 0){
@@ -165,7 +165,7 @@ function Room() {
 
   useEffect(()=>{
     if (!isAnyAdmin){
-      navigate("/?msg=AdminLeft")
+      navigate("/taboo-game/?msg=AdminLeft")
     }
   }, [isAnyAdmin])
 
@@ -621,7 +621,7 @@ function Room() {
                     {winnerTeam == 2 && <span className="text-blue-600">Mavi </span>}
                     Takım Kazandı
                   </h1>
-                  <Link to={'/'}>
+                  <Link to={'/taboo-game/'}>
                     <button 
                     type="button" 
                     className="py-3 mt-10 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-all text-md">

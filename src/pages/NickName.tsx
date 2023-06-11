@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 
 function NickName() {
@@ -7,6 +8,7 @@ function NickName() {
   const [createColor, setCreateColor] = useState<string>("bg-blue-500")
   
   const [error, setError] = useState<boolean>(false)
+  const [errorMsg, setErrorMsg] = useState<string>("")
   const [username, setUsername] = useState<string>('')
   
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,11 +18,16 @@ function NickName() {
     e.preventDefault();
     setIsCreating(true);setCreateColor('bg-blue-600');setError(false)
 
-    if (username.trim() !== ''){
-      sessionStorage.setItem('username', username)
-      navigate((searchParams.get("nexturl") !== null) ? searchParams.get("nexturl")! : '/' )
-    } else {
+    if (username.trim() === ''){
       setIsCreating(false);setCreateColor('bg-blue-500');setError(true)
+      setErrorMsg("Boş Bırakılamaz!")
+    } else if (username.length > 12) {
+      setIsCreating(false);setCreateColor('bg-blue-500');setError(true)
+      setErrorMsg("En Fazla 12 Karakterden Oluşabilir!")
+    } else {
+      sessionStorage.setItem('username', username)
+      sessionStorage.setItem('client_id', uuidv4())
+      navigate((searchParams.get("nexturl") !== null) ? searchParams.get("nexturl")! : '/' )
     }
   }
 
@@ -46,7 +53,7 @@ function NickName() {
                     />
                     {error &&
                       <p className="mt-2 text-sm text-red-600 ">
-                        Boş Bırakılamaz!
+                        {errorMsg}
                       </p>
                     }
                 </div>

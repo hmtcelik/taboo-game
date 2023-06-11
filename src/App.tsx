@@ -1,10 +1,10 @@
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Base from "./pages/base";
 import CreateRoom from "./pages/CreateRoom";
 import NickName from "./pages/NickName";
 import Room from "./pages/Room";
+import AddWord from "./pages/AddWord";
 
 function App() {
 
@@ -17,6 +17,7 @@ function App() {
           <Route index element={<Base />} />
           <Route path="create" element={<CreateRoom />} />
           <Route path="setNickName" element={<NickName/>} />
+          <Route path="add-word/" element={<AddWord/>} />
         </Route>
 
           <Route path="/room/:id/:capacity/" element={<Room />} />

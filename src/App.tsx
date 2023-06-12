@@ -17,7 +17,7 @@ function App() {
           <Route index element={<Base />} />
           <Route path="create" element={<CreateRoom />} />
           <Route path="setNickName" element={<NickName/>} />
-          <Route path="add-word/" element={<AddWord/>} />
+          <Route path="add-word" element={<AddWord/>} />
         </Route>
 
           <Route path="/room/:id/:capacity/" element={<Room />} />

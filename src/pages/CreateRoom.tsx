@@ -24,7 +24,7 @@ function CreateRoom() {
       <div className="w-full max-w-md mx-auto p-6 mt-24">
         <div className="mt-7 pb-3 bg-white border border-gray-200 rounded-xl shadow-sm">
           <div className="p-4 sm:p-7">
-          <Link to={'/'} className="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline dark:text-blue-400" >
+          <Link to={'/taboo-game'} className="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline dark:text-blue-400" >
             <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
               <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
             </svg>

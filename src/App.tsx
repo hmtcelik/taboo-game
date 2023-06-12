@@ -13,14 +13,14 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path="/taboo-game">
+        <Route path="/">
           <Route index element={<Base />} />
           <Route path="create" element={<CreateRoom />} />
           <Route path="setNickName" element={<NickName/>} />
           <Route path="add-word/" element={<AddWord/>} />
         </Route>
 
-          <Route path="/taboo-game/room/:id/:capacity/" element={<Room />} />
+          <Route path="/room/:id/:capacity/" element={<Room />} />
       </Routes>
     </BrowserRouter>
     </>

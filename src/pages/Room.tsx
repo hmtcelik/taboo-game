@@ -91,7 +91,7 @@ function Room() {
     }    
   },[])
 
-  const { sendJsonMessage, lastMessage, lastJsonMessage } = useWebSocket(`ws://178.62.228.126:8765/ws/${id}/${clientID}`);  
+  const { sendJsonMessage, lastMessage, lastJsonMessage } = useWebSocket(`wss://tabooserver.onrender.com/ws/${id}/${clientID}`);  
   
   useEffect(()=>{
     sendJsonMessage(JSON.parse(JSON.stringify({"action":"get_data"})))

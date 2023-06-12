@@ -22,7 +22,7 @@ function AddWord() {
       setIsSuccess(false)
       setError(false)
       setIsSend(true)
-      axios.post('http://178.62.228.126:8765/_/word/', {
+      axios.post('https://tabooserver.onrender.com/_/word/', {
         word: word,
         taboos: [taboo1,taboo2,taboo3,taboo4,taboo5]
       })

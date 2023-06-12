@@ -91,7 +91,7 @@ function Room() {
     }    
   },[])
 
-  const { sendJsonMessage, lastMessage, lastJsonMessage, readyState } = useWebSocket(`ws://localhost:8000/ws/${id}/${clientID}`);  
+  const { sendJsonMessage, lastMessage, lastJsonMessage, readyState } = useWebSocket(`wss://tabooserver.onrender.com/ws/${id}/${clientID}`);  
   
   useEffect(()=>{
     if (readyState === ReadyState.CLOSED){

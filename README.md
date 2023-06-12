@@ -1,6 +1,5 @@
-# taboo-game
-taboo game ui
+# TABOO
 
-game link:
+Online Real-Time Taboo Game, built with vite-react and deployed on vercel, also used react-use-websocket
 
-taboo-game-pearl.vercel.app
+game link: https://taboo-game-pearl.vercel.app/

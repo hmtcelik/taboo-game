@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom'
-import useWebSocket from 'react-use-websocket';
+import useWebSocket, {ReadyState} from 'react-use-websocket';
 
 export interface DataType {
   clients: ClientType[]
@@ -91,8 +91,14 @@ function Room() {
     }    
   },[])
 
-  const { sendJsonMessage, lastMessage, lastJsonMessage } = useWebSocket(`wss://tabooserver.onrender.com/ws/${id}/${clientID}`);  
+  const { sendJsonMessage, lastMessage, lastJsonMessage, readyState } = useWebSocket(`ws://localhost:8000/ws/${id}/${clientID}`);  
   
+  useEffect(()=>{
+    if (readyState === ReadyState.CLOSED){
+      navigate("/?msg=AlreadyStart")
+    }
+  }, [readyState])
+
   useEffect(()=>{
     sendJsonMessage(JSON.parse(JSON.stringify({"action":"get_data"})))
     sendJsonMessage(JSON.parse(JSON.stringify({"action":"connect", "client_id":clientID, "username":username})))

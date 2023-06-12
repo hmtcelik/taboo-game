@@ -450,7 +450,7 @@ function Room() {
                     </h2>
                     <hr className="my-3" />
                     <div className="text-center">
-                      <ul className="list-none list-inside text-gray-900 dark:text-gray-200">
+                      <ul className="list-none list-inside text-gray-900">
                         {data.word.taboos.map((tb)=>(
                           <li className="mt-2 text-lg" key={tb}>{tb}</li>
                         ))}
@@ -535,19 +535,19 @@ function Room() {
                         <div className="p-1.5 min-w-full inline-block align-middle">
                           <div className="flex justify-center">
                             <div className="overflow-hidden max-w-lg">
-                              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                              <table className="min-w-full divide-y divide-gray-200">
                                 <thead>
                                   <tr>
                                     <th scope="col" className="px-12 py-2 text-left text-xs font-medium text-gray-500 uppercase">Oyuncu</th>
                                     <th scope="col" className="px-12 py-2 text-left text-xs font-medium text-gray-500 uppercase">Puan</th>
                                   </tr>
                                 </thead>
-                                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tbody className="divide-y divide-gray-200">
                                 {data.clients?.map((cl)=>{
                                   if (cl.team === 1){
                                     return <tr key={cl.id}>
-                                      <td className="px-12 py-2 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{cl.username}</td>
-                                      <td className="px-12 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{cl.score}</td>
+                                      <td className="px-12 py-2 whitespace-nowrap text-sm font-medium text-gray-800">{cl.username}</td>
+                                      <td className="px-12 py-2 whitespace-nowrap text-sm text-gray-800">{cl.score}</td>
                                     </tr>
                                   }
                                 })}
@@ -580,19 +580,19 @@ function Room() {
                         <div className="p-1.5 min-w-full inline-block align-middle">
                           <div className="flex justify-center">
                             <div className="overflow-hidden max-w-lg">
-                              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                              <table className="min-w-full divide-y divide-gray-200 ">
                                 <thead>
                                   <tr>
                                     <th scope="col" className="px-12 py-2 text-left text-xs font-medium text-gray-500 uppercase">Oyuncu</th>
                                     <th scope="col" className="px-12 py-2 text-left text-xs font-medium text-gray-500 uppercase">Puan</th>
                                   </tr>
                                 </thead>
-                                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tbody className="divide-y divide-gray-200 ">
                                 {data.clients?.map((cl)=>{
                                   if (cl.team === 2){
                                     return <tr key={cl.id}>
-                                      <td className="px-12 py-2 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{cl.username}</td>
-                                      <td className="px-12 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{cl.score}</td>
+                                      <td className="px-12 py-2 whitespace-nowrap text-sm font-medium text-gray-800 ">{cl.username}</td>
+                                      <td className="px-12 py-2 whitespace-nowrap text-sm text-gray-800 ">{cl.score}</td>
                                     </tr>
                                   }
                                 })}
